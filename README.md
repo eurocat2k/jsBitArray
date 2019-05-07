@@ -29,3 +29,19 @@ bb.printArray();
 //}
 //Binary string representation: 1010011001010010
 ```
+- or use array of UInt8 octets:
+```javascript
+ba.fromArr([255,103,45,20]);
+console.log(ba.octets);
+ba.printArray();
+
+// will produce
+//[ 255, 103, 45, 20 ]
+//{
+//  BIN: '11111111 01100111 00101101 00010100',
+//  OCT: '377 147 055 024',
+//  HEX: 'ff 67 2d 14',
+//  DEC: '255 103 45 20'
+//}
+//Binary string representation: 11111111011001110010110100010100
+```
