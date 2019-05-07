@@ -15,7 +15,6 @@
             return instance;
         };
         global[name] = instance;
-
     }
 })('BitArray',function() {
     'use strict';
