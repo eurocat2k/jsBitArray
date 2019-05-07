@@ -1,6 +1,6 @@
 # jsBitArray
 bit manipulation module in javascript
-## Usage in server side
+## Usage
 First of all put the *bitarr.js* into the working PATH, where your app can reach it.
 Then call **require** to import the code into your application as usual - *see **bitarray_test.js** how it works* :
 ```javascript
@@ -45,3 +45,4 @@ ba.printArray();
 //}
 //Binary string representation: 11111111011001110010110100010100
 ```
+Of course you can modify existing bit array bitwise using **setBit** and **clearBit** and **xorBit** methods.
