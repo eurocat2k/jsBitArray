@@ -1,7 +1,6 @@
 /**
  * BitArray in JS
  */
-'use strict';
 (function(name, impl) {
     if (typeof define === 'function' && define.amd) {
         define(impl);
@@ -19,6 +18,7 @@
 
     }
 })('BitArray',function() {
+    'use strict';
     const CHAR_BITS = 8;
     const DEBUG = false;
     function parseHexString(str) {
