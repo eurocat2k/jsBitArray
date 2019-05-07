@@ -1,5 +1,5 @@
 # jsBitArray
-bit manipulation module in javascript
+bit manipulation module in javascript - written to support Asterix Radar data processing module, and other aviation related data processing tools.
 ## Usage
 First of all put the *bitarr.js* into the working PATH, where your app can reach it.
 Then call **require** to import the code into your application as usual - *see **bitarray_test.js** how it works* :
@@ -8,7 +8,7 @@ Then call **require** to import the code into your application as usual - *see *
 var BitArray = require('<path_to_module>/bitarr.js');
 ...
 ```
-Then instantiate BitArray object:
+Then instantiate **BitArray** object:
 ```javascript
 var ba = new BitArray();
 ```
