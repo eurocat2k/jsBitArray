@@ -16,7 +16,6 @@
             return instance;
         };
         global[name] = instance;
-
     }
 })('BitArray',function() {
     const CHAR_BITS = 8;
