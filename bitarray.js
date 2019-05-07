@@ -242,7 +242,7 @@
                 throw new Error('invalid type of argument: %s', cname);
             }
         } else {
-            throw new Error("fromBitarr requires argument either array, typed array or buffer");
+            throw new Error("fromArr requires argument either array, typed array or buffer");
         }
     };
     BitArray.prototype.fromString = function(s) {
