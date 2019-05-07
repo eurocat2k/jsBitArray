@@ -1,8 +1,8 @@
 /**
  * BitArray in JS
  */
+'use strict';
 (function(name, impl) {
-    'use strict';
     if (typeof define === 'function' && define.amd) {
         define(impl);
     } else if (typeof module !== 'undefined' && module.exports) {
@@ -16,9 +16,11 @@
             return instance;
         };
         global[name] = instance;
+
     }
 })('BitArray',function() {
     const CHAR_BITS = 8;
+    const DEBUG = false;
     function parseHexString(str) {
         var result = [];
         while (str.length >= 8) {
@@ -195,9 +197,13 @@
             this.clearBitBe(idx);
             this.bits_le = this.bits_be.slice();
         }
-        ba.fromString(this.toString());
-        ba.printArray();
-        this.octets = ba.octets.slice();
+        if (DEBUG) {
+            ba.fromString(this.toString());
+            ba.printArray();
+        }
+        if (ba.octets && ba.octets.length) {
+            this.octets = ba.octets.slice();
+        }
     };
     BitArray.prototype.clearBit = function(idx) {
         let i = 0, j = 0, ba = new BitArray();
@@ -208,9 +214,13 @@
             this.clearBitBe(idx);
             this.bits_le = this.bits_be.slice();
         }
-        ba.fromString(this.toString());
-        ba.printArray();
-        this.octets = ba.octets.slice();
+        if (DEBUG) {
+            ba.fromString(this.toString());
+            ba.printArray();
+        }
+        if (ba.octets && ba.octets.length) {
+            this.octets = ba.octets.slice();
+        }
     };
     BitArray.prototype.fromArr = function(b) {
         var cname = null,
@@ -298,7 +308,7 @@
             octstr = '',
             decstr = '',
             ascii  = '';
-        for (i = 0; i < this.byte_count; i += 1) {
+        for (let i = 0; i < this.byte_count; i += 1) {
             if (i == 0) {
                 binstr += this.octets[i].toString(2).padStart(8, 0);
                 octstr += this.octets[i].toString(8).padStart(3, 0);
