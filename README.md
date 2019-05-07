@@ -13,7 +13,7 @@ Then instantiate BitArray object:
 var ba = new BitArray();
 ```
 You can then work with the new instance in various ways:
-- get binary data as a binary number converted to string contains '0's and '1's as required
+- get binary data as a binary number converted to string contains '**0**'s and '**1**'s as required
 ```javascript
 ba.fromString('1010011001010010');
 console.log(bb.octets);
@@ -29,7 +29,7 @@ bb.printArray();
 //}
 //Binary string representation: 1010011001010010
 ```
-- or use array of UInt8 octets:
+- or use array of **UInt8** octets:
 ```javascript
 ba.fromArr([255,103,45,20]);
 console.log(ba.octets);
@@ -45,4 +45,4 @@ ba.printArray();
 //}
 //Binary string representation: 11111111011001110010110100010100
 ```
-Of course you can modify existing bit array bitwise using **setBit** and **clearBit** and **xorBit** methods.
+Of course you can modify existing bit array bitwise using **setBit** and **clearBit** and **xorBit** methods. These methods are ready to manipulate bit arrays either Little Endian or Big Endian fashion as required.
