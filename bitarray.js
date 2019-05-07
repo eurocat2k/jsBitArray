@@ -196,8 +196,8 @@
             this.clearBitBe(idx);
             this.bits_le = this.bits_be.slice();
         }
+        ba.fromString(this.toString());
         if (DEBUG) {
-            ba.fromString(this.toString());
             ba.printArray();
         }
         if (ba.octets && ba.octets.length) {
@@ -213,8 +213,8 @@
             this.clearBitBe(idx);
             this.bits_le = this.bits_be.slice();
         }
+        ba.fromString(this.toString());
         if (DEBUG) {
-            ba.fromString(this.toString());
             ba.printArray();
         }
         if (ba.octets && ba.octets.length) {
