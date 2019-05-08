@@ -121,7 +121,7 @@
         if (idx < 0 || idx >= this.bit_count) {
             throw new Error("Invalid index " + idx + " the bitarray size does not fit!");
         }
-        return this.bits_le[idx];
+        return this.bits_le[(this.bit_count-1)-idx];
     };
     BitArray.prototype.setBitLe = function(idx) {
         let i = 0,
@@ -129,7 +129,7 @@
         if (idx < 0 || idx >= this.bit_count) {
             throw new Error("Invalid index " + idx + " the bitarray size does not fit!");
         }
-        this.bits_le[idx] = 1;
+        this.bits_le[(this.bit_count-1)-idx] = 1;
     };
     BitArray.prototype.clearBitLe = function(idx) {
         let i = 0,
@@ -137,7 +137,7 @@
         if (idx < 0 || idx >= this.bit_count) {
             throw new Error("Invalid index " + idx + " the bitarray size does not fit!");
         }
-        this.bits_le[idx] = 0;
+        this.bits_le[(this.bit_count-1)-idx] = 0;
     };
     BitArray.prototype.xorBitLe = function(idx) {
         let i = 0,
@@ -145,7 +145,7 @@
         if (idx < 0 || idx >= this.bit_count) {
             throw new Error("Invalid index " + idx + " the bitarray size does not fit!");
         }
-        this.bits_le[idx] ^= 1;
+        this.bits_le[(this.bit_count-1)-idx] ^= 1;
     };
     // big endian bit order
     BitArray.prototype.getBitBe = function(idx) {
@@ -242,7 +242,7 @@
                 throw new Error('invalid type of argument: %s', cname);
             }
         } else {
-            throw new Error("fromArr requires argument either array, typed array or buffer");
+            throw new Error("fromBitarr requires argument either array, typed array or buffer");
         }
     };
     BitArray.prototype.fromString = function(s) {
