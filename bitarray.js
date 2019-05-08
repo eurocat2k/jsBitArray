@@ -71,7 +71,7 @@
             i = 0,
             j = 0,
             idx = 0,
-            bcnt = 0,
+            bitcount = 0,
             octet = null;
         if (typeof b === 'undefined') {
             throw new Error('Bit array source must be defined!');
@@ -96,18 +96,18 @@
         this.bits_be = new Uint8Array((CHAR_BITS * this.byte_count));
         this.bits_le = new Uint8Array((CHAR_BITS * this.byte_count));
         this.bit_count = this.bits_be.length;
-        bcnt = CHAR_BITS * this.byte_count;
-        bcnt -= 1;
+        bitcount = CHAR_BITS * this.byte_count;
+        bitcount -= 1;
         for (i = 0; i < this.byte_count; i += 1) {
             octet = this.octets[i];
             console.log('Octet[%d]: %s', i, octet.toString(2).padStart(8, 0));
             for (j = CHAR_BITS - 1; j >= 0; j -= 1) {
                 idx = (i * CHAR_BITS) + j;
                 if (octet & 1) {
-                    this.bits_be[(bcnt - idx)] = 1;
+                    this.bits_be[(bitcount - idx)] = 1;
                     this.bits_le[idx] = 1;
                 } else {
-                    this.bits_be[(bcnt - idx)] = 0;
+                    this.bits_be[(bitcount - idx)] = 0;
                     this.bits_le[idx] = 0;
                 }
                 octet >>= 1;
@@ -117,35 +117,43 @@
     // little endian bit order
     BitArray.prototype.getBitLe = function(idx) {
         let i = 0,
-            j = 0;
+            j = 0,
+            bitcount = CHAR_BITS * this.byte_count;
+        bitcount -= 1;
         if (idx < 0 || idx >= this.bit_count) {
             throw new Error("Invalid index " + idx + " the bitarray size does not fit!");
         }
-        return this.bits_le[(this.bit_count-1)-idx];
+        return this.bits_le[bitcount-idx];
     };
     BitArray.prototype.setBitLe = function(idx) {
         let i = 0,
-        j = 0;
+            j = 0,
+            bitcount = CHAR_BITS * this.byte_count;
+        bitcount -= 1;;
         if (idx < 0 || idx >= this.bit_count) {
             throw new Error("Invalid index " + idx + " the bitarray size does not fit!");
         }
-        this.bits_le[(this.bit_count-1)-idx] = 1;
+        this.bits_le[bitcount-idx] = 1;
     };
     BitArray.prototype.clearBitLe = function(idx) {
         let i = 0,
-        j = 0;
+            j = 0,
+            bitcount = CHAR_BITS * this.byte_count;
+        bitcount -= 1;;
         if (idx < 0 || idx >= this.bit_count) {
             throw new Error("Invalid index " + idx + " the bitarray size does not fit!");
         }
-        this.bits_le[(this.bit_count-1)-idx] = 0;
+        this.bits_le[bitcount-idx] = 0;
     };
     BitArray.prototype.xorBitLe = function(idx) {
         let i = 0,
-        j = 0;
+            j = 0,
+            bitcount = CHAR_BITS * this.byte_count;
+        bitcount -= 1;;
         if (idx < 0 || idx >= this.bit_count) {
             throw new Error("Invalid index " + idx + " the bitarray size does not fit!");
         }
-        this.bits_le[(this.bit_count-1)-idx] ^= 1;
+        this.bits_le[bitcount-idx] ^= 1;
     };
     // big endian bit order
     BitArray.prototype.getBitBe = function(idx) {
