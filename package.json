@@ -2,7 +2,7 @@
   "name": "jsbitarray",
   "version": "1.0.18",
   "description": "",
-  "main": "index.js",
+  "main": "bitarray.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
