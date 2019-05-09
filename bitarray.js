@@ -59,12 +59,16 @@
      * The module
      */
     var BitArray = function() {
-        this.endianness = (new Uint8Array(new Uint32Array([0x12345678]).buffer)[0] === 0x12) ? 'big' : 'little';
-        this.byte_count = 0;
-        this.bit_count = 0;
-        this.octets = null;
-        this.bits_be = null;
-        this.bits_le = null;
+        let self = this;
+        this.init = function init() {
+            self.byte_count = 0;
+            self.bit_count = 0;
+            self.octets = null;
+            self.bits_be = null;
+            self.bits_le = null;
+            self.endianness = (new Uint8Array(new Uint32Array([0x12345678]).buffer)[0] === 0x12) ? 'big' : 'little';
+        };
+        this.init();
     };
     BitArray.prototype.create = function(b) {
         let typestr = null,
@@ -204,6 +208,25 @@
             this.clearBitBe(idx);
             this.bits_le = this.bits_be.slice();
         }
+        ba.init();
+        ba.fromString(this.toString());
+        if (DEBUG) {
+            ba.printArray();
+        }
+        if (ba.octets && ba.octets.length) {
+            this.octets = ba.octets.slice();
+        }
+    };
+    BitArray.prototype.xorBit = function(idx) {
+        let i = 0, j = 0, ba = new BitArray();
+        if (this.endianness === 'little') {
+            this.xorBitLe(idx);
+            this.bits_be = this.bits_le.slice();
+        } else {
+            this.xorBitBe(idx);
+            this.bits_le = this.bits_be.slice();
+        }
+        ba.init();
         ba.fromString(this.toString());
         if (DEBUG) {
             ba.printArray();
@@ -234,6 +257,7 @@
             i = 0,
             len = 0,
             bstr = '';
+        this.init();
         if (b) {
             cname = b.constructor.name;
             if (cname.match(/array/ig)) {
@@ -261,6 +285,7 @@
             octet = 0,
             blen = 0,
             gap = 0;
+        this.init();
         if (s) {
             cname = s.constructor.name;
             if (cname.match(/string/gi)) {
@@ -319,7 +344,7 @@
             if (i == 0) {
                 binstr += this.octets[i].toString(2).padStart(8, 0);
                 octstr += this.octets[i].toString(8).padStart(3, 0);
-                hexstr += this.octets[i].toString(16).padStart(2, 0);
+                hexstr += this.octets[i].toString(16).toUpperCase().padStart(2, 0);
                 decstr += this.octets[i].toString(10);
             } else {
                 binstr += ' ';
@@ -328,7 +353,7 @@
                 decstr += ' ';
                 binstr += this.octets[i].toString(2).padStart(8, 0);
                 octstr += this.octets[i].toString(8).padStart(3, 0);
-                hexstr += this.octets[i].toString(16).padStart(2, 0);
+                hexstr += this.octets[i].toString(16).toUpperCase().padStart(2, 0);
                 decstr += this.octets[i].toString(10);
             }
         }
