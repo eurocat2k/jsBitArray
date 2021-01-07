@@ -60,7 +60,7 @@
      */
     var BitArray = function() {
         let self = this;
-        this.init = function init() {
+        function init() {
             self.byte_count = 0;
             self.bit_count = 0;
             self.octets = null;
@@ -68,7 +68,7 @@
             self.bits_le = null;
             self.endianness = (new Uint8Array(new Uint32Array([0x12345678]).buffer)[0] === 0x12) ? 'big' : 'little';
         };
-        this.init();
+        init();
     };
     BitArray.prototype.create = function(b) {
         let typestr = null,
